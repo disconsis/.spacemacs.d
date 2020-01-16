@@ -1,0 +1,62 @@
+* Leetcode Emacs Layer
+
+This layer adds the functionality to use leetcode from within Emacs. This layer uses the wonderful package available at [[https://github.com/kaiwk/leetcode.el][leetcode.el]]. The package depends on the following, which in turn makes the layer depend on the following:
+
+** Dependencies
+
+1. request.el
+2. request-deferred.el
+3. graphql.el
+4. spinner.el
+
+This layer depends in the following packages. They are automatically included and installed when this layer is included for installation.
+
+*** External Dependencies
+
+1. cURL 
+
+This package needs the curl package to make calls to the leetcode API for interactions.
+
+** Installation
+
+To install the layer, clone it into the private repo:
+
+#+begin_src bash
+git clone https://github.com/anmoljagetia/leetcode-emacs-layer.git ~/.emacs.d/private/myleetcode
+#+end_src
+
+Once the layer has been cloned, add it to the =dotspacemacs-configuration-layers= like the following:
+
+#+begin_src elisp
+  dotspacemacs-configuration-layers
+    '(
+      myleetcode
+      .
+      .
+      .
+      
+#+end_src
+
+** Usage
+   
+The first time you enter ~M-x leetcode~, Emacs will prompt you to input account and password. If login successful, Emacs will save it into a file. If you are interested in what happend here, you can check [[https://www.gnu.org/software/emacs/manual/html_mono/auth.html][auth-source.el]].
+
+You can set your preferred LeetCode programming language and SQL by setting =leetcode-prefer-language= and =leetcode-prefer-sql=:
+
+#+begin_src emacs-lisp
+(setq leetcode-prefer-language "python3")
+(setq leetcode-prefer-sql "mysql")
+#+end_src
+
+** Keymap
+   
+|---------+---------------------------+---------------------------------------------------------------------------------------|
+| keymap  | command                       | effect                                                                                |
+|---------+---------------------------+---------------------------------------------------------------------------------------|
+| =a L l= | leetcode                      | This starts the leetcode application                                                  |
+| =a L d= | leetcode-show-current-problem | Shows the problem description in a new buffer.                                        |
+|         |                               | This can also be accessed using the =TAB= key or the =RET= key in the leetcode-buffer |
+| =a L r= | leetcode-refresh              | Refreshed the problem buffer                                                          |
+| =a L t= | leetcode-try                  | Tries the code with the test input                                                    |
+| =a L u= | leetcode-submit               | Submits the code in the buffer for submission                                         |
+|---------+---------------------------+---------------------------------------------------------------------------------------|

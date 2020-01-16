@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for
+# key: \For
+# --
+\For{$1}
+  $0
+\EndFor

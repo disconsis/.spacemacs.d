@@ -1,0 +1,2 @@
+* TODO Make =latex-insert-item= smart (insert the next item bullet based on the previous one)
+Might be too hard.

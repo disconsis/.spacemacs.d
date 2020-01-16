@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: function
+# key: \func
+# --
+\Function{$1}{$2}
+  $0
+\EndFunction

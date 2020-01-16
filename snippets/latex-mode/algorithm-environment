@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: algorithm environment
+# key: \algo
+# --
+\begin{algorithmic}[1]
+  \begin{algorithm}
+    $1
+  \end{algorithm}
+\end{algorithmic}

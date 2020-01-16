@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: if
+# key: \If
+# --
+\If{$1}
+  $0
+\EndIf
