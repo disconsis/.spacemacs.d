@@ -1,5 +1,5 @@
 ;; font
-(set-face-attribute 'variable-pitch nil :family "ETBembo" :height 1.2)
+(set-face-attribute 'variable-pitch nil :family "Noto Sans" :height 1.0)
 (set-face-attribute 'fixed-pitch nil :family 'unspecified :slant 'normal)
 (set-fontset-font "fontset-default" '(#x2500 . #x2570)
                                     (font-spec :family "Iosevka Term SS06"))

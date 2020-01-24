@@ -1,5 +1,5 @@
 (defconst org-config-packages
-  '(org))
+  '(org mixed-pitch))
 
 (defun org-config/post-init-org ()
   ;; org agenda
@@ -38,10 +38,10 @@
    org-hide-emphasis-markers t  ;; sure? try to remove it for the current line
    org-catch-invisible-edits 'show-and-error)
 
-  ;; theming
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (variable-pitch-mode)))
+  ;; ;; theming
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda ()
+  ;;             (variable-pitch-mode)))
 
   ;; (spacemacs/add-to-hooks
   ;;  (defun org-config/set-fixed-pitch-faces-for-variable-pitch-mode ()
@@ -64,3 +64,8 @@
 
 
   )
+
+(defun org-config/init-mixed-pitch ()
+  (use-package mixed-pitch
+    :defer t
+    :hook (org-mode . mixed-pitch-mode)))

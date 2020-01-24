@@ -25,6 +25,7 @@
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-help-tooltip t)
+     auto-completion-config
      (syntax-checking
      :enabled-for prog-mode)
      folding
