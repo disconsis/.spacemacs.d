@@ -7,7 +7,7 @@
      (list (expand-file-name "layers/" dotspacemacs-directory))
    dotspacemacs-configuration-layers
    '(
-     vimscript;; config helpers
+     ;; config helpers
      keybindings
 
      ;; editing
@@ -28,6 +28,8 @@
      (syntax-checking
      :enabled-for prog-mode)
      folding
+     persistence
+     helm-config
 
      ;; version control
      (version-control
@@ -35,6 +37,7 @@
       version-control-diff-tool 'git-gutter+
       version-control-diff-side 'left)
      git
+     git-config
 
      ;; display
      theme-config
@@ -53,11 +56,13 @@
      csv
      coq-config
      grasshopper
+     yaml
+     vimscript
 
      ;; applications
      myleetcode)
 
-   dotspacemacs-additional-packages '(undohist scala-mode)
+   dotspacemacs-additional-packages '(scala-mode)
    dotspacemacs-frozen-packages '()
    dotspacemacs-excluded-packages '()
    dotspacemacs-install-packages 'used-only))
@@ -77,24 +82,25 @@
                                 (projects . 5))
    dotspacemacs-startup-buffer-responsive t
    dotspacemacs-scratch-mode 'emacs-lisp-mode
-   dotspacemacs-themes '(doom-one
-                         gruvbox-light-soft
+   dotspacemacs-themes '(
+                         doom-one
                          jbeans
-                         mccarthy
+                         seti
+                         gruvbox-light-soft
                          )
    dotspacemacs-colorize-cursor-according-to-state t
    dotspacemacs-default-font '(
-                               ("curie" :powerline-scale 1.2)
+                               ("Iosevka Term SS06"
+                                :size 15
+                                :weight normal
+                                :powerline-scale 1.2)
 
                                ("Victor Mono"
                                 :size 12
                                 :weight semi-bold
                                 :powerline-scale 1.2)
 
-                               ("Iosevka Term SS06"
-                                :size 15
-                                :weight normal
-                                :powerline-scale 1.2)
+                               ("curie" :powerline-scale 1.2)
                                )
    dotspacemacs-leader-key "SPC"
    dotspacemacs-emacs-command-key "SPC"
@@ -159,28 +165,6 @@
                          (abbreviate-file-name (buffer-file-name))
                        "%b"))))))
 
-  ;; persistent undo history
-  (use-package undohist
-    :demand
-    :custom
-    (undohist-directory (expand-file-name "var/undohist/" dotspacemacs-directory))
-    :config
-    (undohist-initialize))
-
-  ;; skip . and .. on `helm-find-files'
-  (defun my/helm-skip-dots (old-func &rest args)
-    "Skip . and .. initially in helm-find-files.  First call OLD-FUNC with ARGS."
-    (apply old-func args)
-    (let ((sel (helm-get-selection)))
-      (if (and (stringp sel) (string-match "/\\.$" sel))
-          (helm-next-line 2)))
-    (let ((sel (helm-get-selection))) ; if we reached .. move back
-      (if (and (stringp sel) (string-match "/\\.\\.$" sel))
-          (helm-previous-line 1))))
-
-  (advice-add #'helm-preselect :around #'my/helm-skip-dots)
-  (advice-add #'helm-ff-move-to-first-real-candidate :around #'my/helm-skip-dots)
-
   ;; apropos help
   (spacemacs/declare-prefix "h a" "help-apropos")
   (spacemacs/set-leader-keys
@@ -237,50 +221,4 @@
   (evil-define-key 'insert 'global
      (kbd "C-b") #'left-char
      (kbd "C-f") #'right-char)
-
-
-  ;; version control
-  (spacemacs/set-leader-keys
-    "a m" #'magit)
-
-  ;; git-gutter
-  (setq git-gutter-fr:side 'left-fringe
-        git-gutter-fr+-side 'left-fringe)
-
-  (setq git-gutter:hide-gutter t)
-
-  (setq vertical-line-fringe-symbol
-        '("....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"
-          "....XXX"))
-
-  (spacemacs/add-to-hooks
-   (defun my/git-gutter-set-fringe-symbols ()
-    (dolist (name '(git-gutter-fr+-added git-gutter-fr+-modified))
-      (eval (macroexpand `(fringe-helper-define name nil ,@vertical-line-fringe-symbol))))
-
-    (fringe-helper-define 'git-gutter-fr+-deleted nil
-      "............."
-      "...XXXXXXXXXX"
-      "...XXXXXXXXXX"
-      "............."
-      ))
-   '(spacemacs-post-user-config-hook spacemacs-post-theme-change-hook))
   )
