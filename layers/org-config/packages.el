@@ -38,15 +38,6 @@
    org-hide-emphasis-markers t  ;; sure? try to remove it for the current line
    org-catch-invisible-edits 'show-and-error)
 
-  ;; ;; theming
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (variable-pitch-mode)))
-
-  ;; (spacemacs/add-to-hooks
-  ;;  (defun org-config/set-fixed-pitch-faces-for-variable-pitch-mode ()
-  ;;    (set-face-attribute 'org-indent nil :foreground "red" :inherit (org-hide fixed-pitch))))
-
   ;; (defun org-show-emphasis-markers-at-point ()
   ;;   (save-match-data
   ;;     (if (and (org-in-regexp org-emph-re 2)
